@@ -23,16 +23,18 @@ while 1:
 
     screen.fill((0, 0, 0))
 
+
+    mousePosition = pygame.mouse.get_pos()
+
+    x, y = mousePosition
+
+    if x + helloWorldSize[0] > 800 :
+        x = 800 - helloWorldSize[0]
+
+    if y + helloWorldSize[1] >600:
+        y = 600 - helloWorldSize[1]
+
+
     screen.blit(helloWorld, (x, y))
-
-    x += 5 *directionX
-    y += 5 * directionY
-
-    if x + helloWorldSize[0] > 800 or x <= 0:
-        directionX *= -1
-
-    if y + helloWorldSize[1] > 600 or y <= 0:
-        directionY *= -1
-
 
     pygame.display.update()
