@@ -6,17 +6,20 @@ windowSize = (800, 600)
 
 screen = pygame.display.set_mode(windowSize)
 
-myriadProFont = pygame.font.SysFont("Myriad Pro", 48)
 
-helloWorld = myriadProFont.render("Hello World!", 1, (255, 0, 255), (255, 255, 255))
+helloWorld = pygame.image.load("mario-icon.png")
 helloWorldSize = helloWorld.get_size()
+
+pygame.mouse.set_visible(False)
 
 x, y = 0, 0
 directionX, directionY = 1, 1
 
 clock = pygame.time.Clock()
 
-while 1:
+sound = pygame.mixer.Sound("punch.wav")
+
+while True:
     clock.tick(40)
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
@@ -30,9 +33,17 @@ while 1:
 
     if x + helloWorldSize[0] > 800 :
         x = 800 - helloWorldSize[0]
+        sound.stop()
+        sound.play()
 
     if y + helloWorldSize[1] >600:
         y = 600 - helloWorldSize[1]
+        sound.stop()
+        sound.play()
+
+    if x == 0 or y == 0:
+        sound.stop()
+        sound.play()
 
 
     screen.blit(helloWorld, (x, y))
